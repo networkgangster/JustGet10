@@ -193,29 +193,6 @@ def menu():
             else:
                 gameDisplay.blit(dic['quitter']['img'], (dic['quitter']['x'], dic['quitter']['y']))
 
-            # Test clic sur bouton "Quitter"
-            if dic['quitter']['x'] + 290 > mouse[0] > dic['quitter']['x'] and dic['quitter']['y'] + 72 + 100 > mouse[1] > dic['quitter']['y' ] + 100:
-                if event.type == pygame.MOUSEBUTTONUP:
-                    global saved
-                    saved = True
-                    save = open('save.txt', 'r')
-                    global n
-                    n = int(save.read(1))
-                    print(n)
-                    for ligne in save:
-                        ligne = ligne.rstrip()
-                        ligne = ligne.split(',')
-                        board.append(ligne)
-                    board.pop(0)
-                    for i in range(len(board)):
-                        for j in range(len(board[0])):
-                            board[i][j] = int(board[i][j])
-                    print(board)
-                    print(type(board))
-                    print(board[1][1])
-                    save.close()
-                    game(n, board)
-
         pygame.display.update()
         clock.tick(FPS)
 
