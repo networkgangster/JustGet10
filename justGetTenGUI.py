@@ -168,7 +168,7 @@ def menu():
         # Permet de gérer les events
         for event in pygame.event.get():
             # Ajoute une action au bouton fermer
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 quit()
 
@@ -221,7 +221,7 @@ def menu2():
         # Permet de gérer les events
         for event in pygame.event.get():
             # Ajoute une action au bouton fermer
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 quit()
 
@@ -301,7 +301,7 @@ def menu3():
         # Permet de gérer les events
         for event in pygame.event.get():
             # Ajoute une action au bouton fermer
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 quit()
 
@@ -460,7 +460,7 @@ def game(n, board):
             # Permet de gérer les events
             for event in pygame.event.get():
                 # Ajoute une action au bouton fermer
-                if event.type == pygame.QUIT:
+                if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     quit()
 
