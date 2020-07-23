@@ -12,7 +12,7 @@
 import random
 
 
-# Génère les élements avec probabilité
+# Erzeugt die Elemente mit Wahrscheinlichkeit
 def element(tuple: tuple):
     nb = random.random()
 
@@ -26,16 +26,16 @@ def element(tuple: tuple):
         return 1
 
 
-# Retourne une board avec les éléments aléatoires
+# Gibt das Spielfeld mit Zufallselementen zurück
 def newBoard(n: int, tuple: tuple):
     board = []
 
-    for i in range(n):  # Ajoute les chiffres au board
+    for i in range(n):  # Fügt dem Spielfeld die Zahlen hinzu
         board.append([element(tuple) for i in range(n)])
     return board
 
 
-# Affiche la board
+# Spielfeld anzeigen
 def display(board: list, n: int):
     for n in board:
         for number in n:

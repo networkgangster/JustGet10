@@ -10,9 +10,9 @@
 """
 
 
-# Vérifie si une case avec les coordonnées i et j ont une case adjacente
+# Prüft, ob eine Zelle mit den Koordinaten i und j eine benachbarte Zelle hat
 def possessAdjacent(n: int, board: list, i: int, j: int):
-    # Debug au cas où i ou j est 'out of range'
+    # Debuggen, falls i oder j 'out of range' liegt
     if not 0 <= i < n or not 0 <= j < n: return 'Error'
     if i + 1 < n:
         if board[i + 1][j] == board[i][j]: return True
@@ -25,7 +25,7 @@ def possessAdjacent(n: int, board: list, i: int, j: int):
     return False
 
 
-# Vérifie si la board possède encore des cases adjacentes
+# Prüft, ob das Spielbrett noch benachbarte Felder hat (also mögliche Züge)
 def playableCase(n: int, board: list):
     for i in range(n):
         for j in range(n):
@@ -34,7 +34,7 @@ def playableCase(n: int, board: list):
     return False
 
 
-# Recherche le nombre le plus grand dans une liste
+# Sucht das Feld mit der höchsten Zahl
 def maxNumber(n: int, board: list):
     nbMax = 1
     for i in range(n):

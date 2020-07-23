@@ -14,17 +14,17 @@ import pygame, bases, possibles, merge
 pygame.init()
 pygame.font.init()
 
-# Vars font
+# Var font
 roboto = pygame.font.Font("fonts/Roboto.ttf", 30)
 
-# Vars couleur
+# Var couleur
 black = (0, 0, 0)
 
-# Var hauteur et largeur de la fenêtre
+# Var Höhe und Breite des Fensters
 display_width = 800
 display_height = 600
 
-# Dictionnaire d'images
+# Dictionary für Bilder
 dic = {
     'logo': {
         'img': pygame.image.load('images/logo.png'),
@@ -120,7 +120,7 @@ dic = {
     },
 }
 
-# Vars de départ de jeu
+# Var für Spielstart
 n = 5
 proba = (0.05, 0.30, 0.6)
 board = []
@@ -130,16 +130,16 @@ saved = False
 
 
 
-# Définit la taille de la fenêtre, met un titre et un icône
+# Bestimmt die Größe des Fensters, setzt einen Titel und ein Symbol
 gameDisplay = pygame.display.set_mode((display_width, display_height), 0, 32)
 pygame.display.set_caption("Just Get 10")
 pygame.display.set_icon(dic['logo']['img'])
 
-# Var avec la clock du jeu
+# Var Spieluhr
 clock = pygame.time.Clock()
 FPS = 60
 
-# Vars texte
+# Var texte
 texte1 = roboto.render('Temps limité par coup', True, (0, 0, 0))
 texte2 = roboto.render('Temps limité pour terminer', True, (0, 0, 0))
 
@@ -152,27 +152,27 @@ def blit(angle):
 
 # noinspection PyTypeChecker
 def menu():
-    # Background de la fenêtre
+    # Hintergrund
     gameDisplay.fill((255, 251, 234))
 
-    # Affiche les boutons du menu principal
+    # Anzeige der Buttons im Hauptmenü
     gameDisplay.blit(dic['logo']['img'], (dic['logo']['x'], dic['logo']['y']))
     gameDisplay.blit(dic['play']['img'], (dic['play']['x'], dic['play']['y']))
     gameDisplay.blit(dic['quitter']['img'], (dic['quitter']['x'], dic['quitter']['y']))
 
     inMenu1 = True
     while inMenu1:
-        # Récupère à chaque passage de boucle la position x, y du curseur
+        # Ruft die x-, y-Position des Cursors bei jedem Schleifendurchlauf ab
         mouse = pygame.mouse.get_pos()
 
-        # Permet de gérer les events
+        # Erlaubt events zu verwalten
         for event in pygame.event.get():
-            # Ajoute une action au bouton fermer
+            # Fügt dem Schließen-Button eine Aktion hinzu
             if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 quit()
 
-            # Test clic sur bouton "Play"
+            # Test click auf "Play" Button
             if dic['play']['x'] + 290 > mouse[0] > dic['play']['x'] and dic['play']['y'] + 72 > mouse[1] > dic['play']['y']:
                 if event.type == pygame.MOUSEBUTTONUP:
                     gameDisplay.blit(dic['play']['img'], (dic['play']['x'], dic['play']['y']))
@@ -182,7 +182,7 @@ def menu():
             else:
                 gameDisplay.blit(dic['play']['img'], (dic['play']['x'], dic['play']['y']))
 
-            # Test clic sur bouton "Quitter"
+            # Test click auf "Quit" Button
             if dic['quitter']['x'] + 290 > mouse[0] > dic['quitter']['x'] and dic['quitter']['y'] + 72 > mouse[1] > dic['quitter']['y']:
                 if event.type == pygame.MOUSEBUTTONUP:
                     gameDisplay.blit(dic['quitter']['img'], (dic['quitter']['x'], dic['quitter']['y']))
@@ -196,16 +196,16 @@ def menu():
         pygame.display.update()
         clock.tick(FPS)
 
-    # Passe au menu avec la difficulté si la boucle est finie
+    # Wechselt zum Menü mit der Schwierigkeit, wenn die Schleife beendet ist
     menu2()
 
 
 # noinspection PyTypeChecker
 def menu2():
-    # Background de la fenêtre
+    # Hintergrund
     gameDisplay.fill((255, 251, 234))
 
-    # Affiche les boutons du menu principal
+    # Anzeige der Buttons im Hauptmenü
     gameDisplay.blit(dic['logo']['img'], (dic['logo']['x'], dic['logo']['y']))
     gameDisplay.blit(dic['petite']['img'], (dic['petite']['x'], dic['petite']['y']))
     gameDisplay.blit(dic['moyenne']['img'], (dic['moyenne']['x'], dic['moyenne']['y']))
@@ -215,21 +215,21 @@ def menu2():
     inMenu2 = True
     while inMenu2:
         global n
-        # Récupère à chaque passage de boucle la position x, y du curseur
+        # Ruft die x-, y-Position des Cursors bei jedem Schleifendurchlauf ab
         mouse = pygame.mouse.get_pos()
 
-        # Permet de gérer les events
+        # Erlaubt events zu verwalten
         for event in pygame.event.get():
-            # Ajoute une action au bouton fermer
+            # Fügt dem Schließen-Button eine Aktion hinzu
             if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 quit()
 
-            # Test clic sur bouton "Retour"
+            # Test click auf "Zurück" Button
             if dic['retour']['x'] + 128 > mouse[0] > dic['retour']['x'] and dic['retour']['y'] + 45 > mouse[1] > dic['retour']['y']:
                 if event.type == pygame.MOUSEBUTTONUP:
                     gameDisplay.blit(dic['retour']['img'], (dic['retour']['x'], dic['retour']['y']))
-                    # Retourne au menu principal
+                    # Zurück zum Hauptmenü
                     inMenu2 = False
                     menu()
                 if event.type == pygame.MOUSEBUTTONDOWN:
@@ -237,7 +237,7 @@ def menu2():
             else:
                 gameDisplay.blit(dic['retour']['img'], (dic['retour']['x'], dic['retour']['y']))
 
-            # Test clic sur bouton "Play"
+            # Test click auf "Petite" Button
             if dic['petite']['x'] + 290 > mouse[0] > dic['petite']['x'] and dic['petite']['y'] + 72 > mouse[1] > dic['petite']['y']:
                 if event.type == pygame.MOUSEBUTTONUP:
                     gameDisplay.blit(dic['petite']['img'], (dic['petite']['x'], dic['petite']['y']))
@@ -248,7 +248,7 @@ def menu2():
             else:
                 gameDisplay.blit(dic['petite']['img'], (dic['petite']['x'], dic['petite']['y']))
 
-            # Test clic sur bouton "Moyenne"
+            # Test click auf "Moyenne" Button
             if dic['moyenne']['x'] + 290 > mouse[0] > dic['moyenne']['x'] and dic['moyenne']['y'] + 72 > mouse[1] > dic['moyenne']['y']:
                 if event.type == pygame.MOUSEBUTTONUP:
                     gameDisplay.blit(dic['moyenne']['img'], (dic['moyenne']['x'], dic['moyenne']['y']))
@@ -259,7 +259,7 @@ def menu2():
             else:
                 gameDisplay.blit(dic['moyenne']['img'], (dic['moyenne']['x'], dic['moyenne']['y']))
 
-            # Test clic sur bouton "Grande"
+            # Test click auf "Grande" Button
             if dic['grande']['x'] + 290 > mouse[0] > dic['grande']['x'] and dic['grande']['y'] + 72 > mouse[1] > dic['grande']['y']:
                 if event.type == pygame.MOUSEBUTTONUP:
                     gameDisplay.blit(dic['grande']['img'], (dic['grande']['x'], dic['grande']['y']))
@@ -273,7 +273,7 @@ def menu2():
         pygame.display.update()
         clock.tick(FPS)
 
-    # Passe au menu avec les options si la boucle est finie
+    # Wechselt zum Menü mit den Optionen, wenn die Schleife beendet ist
     menu3()
 
 
@@ -281,7 +281,7 @@ def menu2():
 def menu3():
     gameDisplay.fill((255, 251, 234))
 
-    # Affiche les boutons du menu principal
+    # Zeigt die Buttons des Hauptmenüs an
     gameDisplay.blit(dic['logo']['img'], (dic['logo']['x'], dic['logo']['y']))
     gameDisplay.blit(dic['limPerCase']['disable'], (dic['limPerCase']['x'], dic['limPerCase']['y']))
     gameDisplay.blit(dic['limPerGame']['disable'], (dic['limPerGame']['x'], dic['limPerGame']['y']))
@@ -295,21 +295,21 @@ def menu3():
 
     inMenu3 = True
     while inMenu3:
-        # Récupère à chaque passage de boucle la position x, y du curseur
+        # Ruft die x-, y-Position des Cursors bei jedem Schleifendurchlauf ab
         mouse = pygame.mouse.get_pos()
 
-        # Permet de gérer les events
+        # Erlaubt events zu verwalten
         for event in pygame.event.get():
-            # Ajoute une action au bouton fermer
+            # Fügt dem Schließen-Button eine Aktion hinzu
             if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 pygame.quit()
                 quit()
 
-            # Test clic sur bouton "Retour"
+            # Test click auf "Zurück" Button
             if dic['retour']['x'] + 128 > mouse[0] > dic['retour']['x'] and dic['retour']['y'] + 45 > mouse[1] > dic['retour']['y']:
                 if event.type == pygame.MOUSEBUTTONUP:
                     gameDisplay.blit(dic['retour']['img'], (dic['retour']['x'], dic['retour']['y']))
-                    # Retourne au menu principal
+                    # Zurück zum Hauptmenü
                     inMenu3 = False
                     menu2()
                 if event.type == pygame.MOUSEBUTTONDOWN:
@@ -317,18 +317,18 @@ def menu3():
             else:
                 gameDisplay.blit(dic['retour']['img'], (dic['retour']['x'], dic['retour']['y']))
 
-            # Test clic sur bouton "Retour"
+            # Test click auf "Start" Button
             if dic['start']['x'] + 290 > mouse[0] > dic['start']['x'] and dic['start']['y'] + 72 > mouse[1] > dic['start']['y']:
                 if event.type == pygame.MOUSEBUTTONUP:
                     gameDisplay.blit(dic['start']['img'], (dic['start']['x'], dic['start']['y']))
-                    # Arrête la boucle afin de commencer le jeu
+                    # Stoppt die Schleife um das Spiel zu beginnen
                     inMenu3 = False
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     gameDisplay.blit(dic['start']['img_pressed'], (dic['start']['x'], dic['start']['y']))
             else:
                 gameDisplay.blit(dic['start']['img'], (dic['start']['x'], dic['start']['y']))
 
-            # Test clic sur bouton "limPerCase"
+            # Test click auf "limPerCase" Button
             if dic['limPerCase']['x'] + 290 > mouse[0] > dic['limPerCase']['x'] and dic['limPerCase']['y'] + 72 > mouse[1] > dic['limPerCase']['y']:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if limCase:
@@ -340,7 +340,7 @@ def menu3():
                     else:
                         gameDisplay.blit(dic['limPerCase']['disable'], (dic['limPerCase']['x'], dic['limPerCase']['y']))
 
-            # Test clic sur bouton "limPerGame"
+            # Test click auf "limPerGame" Button
             if dic['limPerGame']['x'] + 290 > mouse[0] > dic['limPerGame']['x'] and dic['limPerGame']['y'] + 72 > mouse[1] > dic['limPerGame']['y']:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if limGame:
@@ -354,7 +354,7 @@ def menu3():
         pygame.display.update()
         clock.tick(FPS)
 
-    # Passe au jeu...
+    # Spielen...
     game(n, board)
 
 palette = [
@@ -416,7 +416,7 @@ def maxScore(n, board: list):
         angle = 0
         while mlg2:
             gameDisplay.fill((255, 251, 234))
-            # Update bouton
+            # Update button
             displayBoard(board, n, gameDisplay)
             gameDisplay.blit(textSurface, (600, 150))
             gameDisplay.blit(scoreSurface, (680, 200))
@@ -457,14 +457,14 @@ def game(n, board):
             InGame2 = possibles.playableCase(n, board)
             mouse = pygame.mouse.get_pos()
 
-            # Permet de gérer les events
+            # Erlaubt Events zu verwalten
             for event in pygame.event.get():
-                # Ajoute une action au bouton fermer
+                # Fügt dem Schließen-Button eine Aktion hinzu
                 if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     quit()
 
-                # Chrono de fin de jeu
+                # Timer für Spielende
                 if limGame:
                     if event.type == pygame.USEREVENT:
                         counterGame -= 1
@@ -478,7 +478,7 @@ def game(n, board):
                         gameDisplay.blit(dic['back']['img'], (dic['back']['x'], dic['back']['y']))
                         gameDisplay.blit(roboto.render(textGame + ' sec', True, (0, 0, 0)), (600, 32))
 
-                # Chrono de temps limite par case
+                # Zeitlimit-Stoppuhr pro Box
                 if limCase:
                     if event.type == pygame.USEREVENT:
                         counterCase -= 1
@@ -491,7 +491,7 @@ def game(n, board):
                         gameDisplay.blit(dic['back2']['img'], (dic['back2']['x'], dic['back2']['y']))
                         gameDisplay.blit(roboto.render(textCase + ' sec', True, (0, 0, 0)), (600, 72))
 
-                # Test clic sur case
+                # Test click auf Kästchen
                 for colonne in range(len(board)):
                     for ligne in range(len(board)):
                         if (ligne*(128-32*(n-4)))+60 + (128-32*(n-4)) > mouse[1] > (ligne*(128-32*(n-4)))+60 and (colonne*(128-32*(n-4)))+60 + (128-32*(n-4)) > mouse[0] > (colonne*(128-32*(n-4)))+60:
@@ -526,20 +526,20 @@ def game(n, board):
             pygame.display.update()
             clock.tick(FPS)
 
-        # Perdu ? Recommencer ou quitter ?
+        # Verloren? Neu anfangen oder aufhören?
         gameDisplay.blit(dic['restart']['img'], (dic['restart']['x'], dic['restart']['y']))
         gameDisplay.blit(dic['quitter2']['img'], (dic['quitter2']['x'], dic['quitter2']['y']))
         dic['lose']['sound'].set_volume(0.2)
         dic['lose']['sound'].play()
 
         mouse = pygame.mouse.get_pos()
-        # Permet de gérer les events
+        # Erlaubt events zu verwalten
         for event in pygame.event.get():
-            # Ajoute une action au bouton fermer
+            # Fügt dem Schließen-Button eine Aktion hinzu
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-            # Test clic sur bouton "Restart"
+            # Test click auf "Restart" Button
             if dic['restart']['x'] + 148 > mouse[0] > dic['restart']['x'] and dic['restart']['y'] + 37 > mouse[1] > dic['restart']['y']:
                 if event.type == pygame.MOUSEBUTTONUP:
                     gameDisplay.blit(dic['restart']['img'], (dic['restart']['x'], dic['restart']['y']))
@@ -550,7 +550,7 @@ def game(n, board):
             else:
                 gameDisplay.blit(dic['restart']['img'], (dic['restart']['x'], dic['restart']['y']))
 
-            # Test clic sur bouton "Quitter"
+            # Test click auf "Quitter" Button
             if dic['quitter2']['x'] + 148 > mouse[0] > dic['quitter2']['x'] and dic['quitter2']['y'] + 37 > mouse[1] > dic['quitter2']['y']:
                 if event.type == pygame.MOUSEBUTTONUP:
                     gameDisplay.blit(dic['quitter2']['img'], (dic['quitter2']['x'], dic['quitter2']['y']))
@@ -564,9 +564,9 @@ def game(n, board):
         pygame.display.update()
         clock.tick(FPS)
 
-# Lancement de la fonction qui affiche le menu
+# Starten der Funktion, die das Menü anzeigt
 menu()
 
-# Termine le processus
+# Prozess abschließen
 pygame.quit()
 quit()
